@@ -1,8 +1,7 @@
 streamlit
 langchain
-langchain-google-genai
-pypdf
-chromadb
 langchain-community
 langchain-text-splitters
-pysqlite3-binary
+langchain-google-genai
+pypdf
+faiss-cpu
