@@ -3,3 +3,5 @@ langchain
 langchain-google-genai
 pypdf
 chromadb
+langchain-community
+langchain-text-splitters
