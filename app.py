@@ -1,8 +1,3 @@
-# The SQLite fix must be the absolute first thing in the file
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
 import streamlit as st
 import traceback
 import os
@@ -10,16 +5,15 @@ import os
 st.title("Enterprise IT Asset Assistant")
 
 try:
-    # Late imports prevent the server from crashing before boot
     from langchain_community.document_loaders import PyPDFDirectoryLoader
     from langchain_text_splitters import RecursiveCharacterTextSplitter
     from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
-    from langchain_community.vectorstores import Chroma
+    from langchain_community.vectorstores import FAISS
     from langchain.chains import create_retrieval_chain
     from langchain.chains.combine_documents import create_stuff_documents_chain
     from langchain_core.prompts import ChatPromptTemplate
     
-    # Manually bridge the API key from Streamlit to the OS environment
+    # Bridge the API key
     if "GOOGLE_API_KEY" in st.secrets:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
     elif "GOOGLE_API_KEY" not in os.environ:
@@ -35,7 +29,8 @@ try:
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         splits = text_splitter.split_documents(docs)
         embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-        vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
+        # Swapped Chroma for FAISS right here
+        vectorstore = FAISS.from_documents(documents=splits, embedding=embeddings)
         return vectorstore
 
     with st.spinner("Loading ITAM Knowledge Base... This may take a minute."):
