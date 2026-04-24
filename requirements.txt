@@ -5,3 +5,4 @@ pypdf
 chromadb
 langchain-community
 langchain-text-splitters
+pysqlite3-binary
