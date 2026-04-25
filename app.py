@@ -36,7 +36,7 @@ try:
             return None
             
         # Reduced chunk size to protect cloud memory limits
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=700, chunk_overlap=100)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=4000, chunk_overlap=400)
         splits = text_splitter.split_documents(docs)
         
         embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
