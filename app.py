@@ -51,7 +51,7 @@ try:
         
         # Finalize entry
         entry_data["prev_hash"] = prev_hash
-        entry_data["hash"] = entry_data
+        entry_data["hash"] = entry_hash
         
         logs.append(entry_data)
         
