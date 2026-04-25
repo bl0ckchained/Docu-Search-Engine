@@ -39,7 +39,7 @@ try:
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=700, chunk_overlap=100)
         splits = text_splitter.split_documents(docs)
         
-        embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+        embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
         vectorstore = FAISS.from_documents(documents=splits, embedding=embeddings)
         return vectorstore
 
