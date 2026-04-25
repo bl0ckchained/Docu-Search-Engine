@@ -61,7 +61,7 @@ try:
         retriever = vectorstore.as_retriever(search_kwargs={"k": 3}) 
         
         # Pointing to the active chat model endpoint
-        llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
         system_prompt = (
             "You are an IT Asset Management assistant. "
